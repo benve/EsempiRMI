@@ -2,12 +2,17 @@ h1. Esempi di sincronizzazione con Java e RMI
 
 h2. Compilazione:
 
-@ $ javac -d build/classes/ src/pc/server/*.java src/pc/*.java src/pc/countdown/*.java @
+```sh
+ $ javac -d build/classes/ src/pc/server/*.java src/pc/*.java src/pc/countdown/*.java
+```
+
 
 h2. Esecuzione:
 
 h3. Server
-@ $ java -cp build/classes/ pc.server.Server 5 @
+```sh
+ $ java -cp build/classes/ pc.server.Server 5
+```
 
 h3. Client
 @ $ java -cp build/classes/ pc.Client 10 10 127.0.0.1 @

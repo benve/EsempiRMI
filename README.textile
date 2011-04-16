@@ -3,7 +3,8 @@ h1. Esempi di sincronizzazione con Java e RMI
 h2. Compilazione:
 
 <pre>
- $ javac -d build/classes/ src/pc/server/*.java src/pc/*.java src/pc/countdown/*.java
+$ mkdir -p build/classes/ 
+$ javac -d build/classes/ src/pc/server/*.java src/pc/*.java src/pc/countdown/*.java
 </pre>
 
 
@@ -12,7 +13,7 @@ h2. Esecuzione:
 h3. Server
 
 <pre>
- $ java -cp build/classes/ pc.server.Server 5
+$ java -cp build/classes/ pc.server.Server 5
 </pre>
 
 h3. Client

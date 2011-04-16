@@ -1,0 +1,44 @@
+h1. Esempi di sincronizzazione con Java e RMI
+
+h2. Compilazione:
+
+@ $ javac -d build/classes/ src/pc/server/*.java src/pc/*.java src/pc/countdown/*.java @
+
+h2. Esecuzione:
+
+h3. Server
+@ $ java -cp build/classes/ pc.server.Server 5 @
+
+h3. Client
+@ $ java -cp build/classes/ pc.Client 10 10 127.0.0.1 @
+
+h3. Client CountDown
+@ $ java -cp build/classes/ pc.countdown.CountDownClient 10 10 127.0.0.1 @
+
+
+h2. Descrizione Classi:
+
+- pc.server.RMICoda := L'interfaccia di una coda con metodi bloccanti. Write scrive un intero nella coda (il primo parametro e' un id solo per debug).
+Read legge un intero e lo toglie dalla coda (il parametro e' un id solo per debug).
+
+- pc.server.Server := Il server RMI che implementa la coda. Istanzia un oggetto che implementi l'interfaccia RMICoda e lo rende chiamabile da remoto.
+Per istanziare un diverso tipo di coda va decommentata la relativa linea di codice e ricompilata la classe.
+
+- pc.server.CodaSemplice := Una coda che implementa RMICoda. Non ha meccanismi di sincronizzazione !
+Ad ogni esecuzione molto probabilmente fallisce.
+
+- pc.server.CodaSincronizzata := Una coda che implementa RMICoda. Usa i blocchi synchronized, wait() e notify() per la sincronizzazione.
+
+- pc.server.CodaLocks := Una coda che implementa RMICoda. Usa gli oggetti Lock per la sincronizzazione.
+
+- pc.server.CodaBloccante := Una coda che implementa RMICoda. Usa una struttura dati BlockingQueue per la sincronizzazione.
+
+- pc.Client := Il client RMI che si collega al server. Crea un numero specificato di thread produttore e consumatore, i thread si collegano alla coda remota scrivendo e leggendo numeri random.
+
+- pc.Producer := Chiama il metodo remoto write per inserire un intero nella coda.
+
+- pc.Consumer := Chiama il metodo remoto read per togliere un intero dalla coda. Se il valore restituito e' "null" c'e' stato un errore di sincronizzazione.
+
+- pc.countdown.* := Client, Producer e Consumer sono implementati usando gli oggetti CountDownLatch per la sincronizzazione dei thread.
+
+

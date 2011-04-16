@@ -10,16 +10,19 @@ h2. Compilazione:
 h2. Esecuzione:
 
 h3. Server
+
 <pre>
  $ java -cp build/classes/ pc.server.Server 5
 </pre>
 
 h3. Client
+
 <pre>
 $ java -cp build/classes/ pc.Client 10 10 127.0.0.1
 </pre>
 
 h3. Client CountDown
+
 <pre> 
 $ java -cp build/classes/ pc.countdown.CountDownClient 10 10 127.0.0.1
 </pre>
